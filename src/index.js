@@ -37,7 +37,7 @@ function handleSubmit(event) {
 
 async function fetchImg(searchInp) {
   const dataImg = await axios({
-    url: ' https:pixabay.com/api/',
+    url: ' https://pixabay.com/api/',
     params: {
       key: '28345018-0c1af10fb3ec556a31002db0e',
       q: searchInp,

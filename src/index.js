@@ -22,14 +22,16 @@ function handleSubmit(event) {
   searchInp = event.target.elements.searchQuery.value;
   fetchImg(searchInp).then(dataImg => {
     if (dataImg.data.totalHits === 0) {
-      Notiflix.Notify.failure(
+      return Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
+    } else if (searchInp === '') {
+      return Notiflix.Notify.failure('Please insers correct value');
     } else {
+      render(dataImg);
       Notiflix.Notify.success(
         `Hooray we found ${dataImg.data.totalHits} images`
       );
-      render(dataImg);
     }
     observer.observe(refs.guard);
   });
@@ -59,7 +61,6 @@ function UpdatePage(entries) {
         if (dataImg.data.hits.length === 0) {
           Notiflix.Notify.failure('Were sorry you reached end of page');
         }
-
         render(dataImg);
       });
     }

@@ -31,8 +31,8 @@ function handleSubmit(event) {
       );
       render(dataImg);
     }
+    observer.observe(refs.guard);
   });
-  observer.observe(refs.guard);
 }
 
 async function fetchImg(searchInp) {
@@ -54,11 +54,12 @@ async function fetchImg(searchInp) {
 function UpdatePage(entries) {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
+      page += 1;
       fetchImg(searchInp, page).then(dataImg => {
         if (dataImg.data.hits.length === 0) {
           Notiflix.Notify.failure('Were sorry you reached end of page');
         }
-        page += 1;
+
         render(dataImg);
       });
     }
@@ -69,7 +70,6 @@ function render({ data }) {
   markup = data.hits
     .map(element => {
       const markupEl = `<div class="photo-card">
-  <a class='gallery-link' href='${element.largeImageURL}'>
   <div class='gallery-thumb'>
   <img class="gallery-image"
   src='${element.webformatURL}'
@@ -77,7 +77,7 @@ function render({ data }) {
   loading='lazy'
   width='${element.webformatWidth}'
   height='${element.webformatHeight}'
-  /></a>
+  />
   </div>
   <div class="info">
   <p class="info-item">

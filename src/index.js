@@ -2,7 +2,7 @@ import axios from 'axios';
 import refs from './js/refs';
 import Notiflix from 'notiflix';
 
-let page = 0;
+let page = 1;
 let searchInp;
 let markup;
 refs.searchForm.addEventListener('submit', handleSubmit);
